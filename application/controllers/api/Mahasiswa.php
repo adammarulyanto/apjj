@@ -31,7 +31,7 @@ class Mahasiswa extends REST_Controller {
                     'mhs_lastname'    => $this->post('mhs_lastname'),
                     'mhs_birthdate'    => $this->post('mhs_birthdate'),
                     'mhs_email'    => $this->post('mhs_email'),
-                    'mhs_password'    => $this->post('mhs_password'));
+                    'mhs_password'    => sha1($this->post('mhs_password')));
         $insert = $this->db->insert('mhs', $data);
         if ($insert) {
             $this->response($data, 200);
