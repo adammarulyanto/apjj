@@ -1,0 +1,12 @@
+.form-tambah{
+  width: 100%;
+  overflow: hidden;
+}
+.form-tambah .form-tambah-kolom{
+  width: 20%;
+  float: left;
+  margin: 10px;
+}
+.form-tambah-submit{
+  margin: 10px;
+}

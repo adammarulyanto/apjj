@@ -18,7 +18,7 @@ class Attempt extends REST_Controller {
         if ($id == '') {
             $kontak = $this->db->get('attempt')->result();
         } else {
-            $this->db->where('id', $id);
+            $this->db->where('attempt_id', $id);
             $kontak = $this->db->get('attempt')->result();
         }
         $this->response($kontak, 200);

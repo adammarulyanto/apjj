@@ -18,7 +18,7 @@ class Classes extends REST_Controller {
         if ($id == '') {
             $kontak = $this->db->get('classes')->result();
         } else {
-            $this->db->where('id', $id);
+            $this->db->where('class_code', $id);
             $kontak = $this->db->get('classes')->result();
         }
         $this->response($kontak, 200);

@@ -18,7 +18,7 @@ class Attendance extends REST_Controller {
         if ($id == '') {
             $kontak = $this->db->get('attendance')->result();
         } else {
-            $this->db->where('id', $id);
+            $this->db->where('attendance_id', $id);
             $kontak = $this->db->get('attendance')->result();
         }
         $this->response($kontak, 200);

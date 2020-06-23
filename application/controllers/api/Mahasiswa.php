@@ -18,7 +18,7 @@ class Mahasiswa extends REST_Controller {
         if ($id == '') {
             $kontak = $this->db->get('mhs')->result();
         } else {
-            $this->db->where('id', $id);
+            $this->db->where('mhs_nim', $id);
             $kontak = $this->db->get('mhs')->result();
         }
         $this->response($kontak, 200);
@@ -34,7 +34,8 @@ class Mahasiswa extends REST_Controller {
                     'mhs_password'    => sha1($this->post('mhs_password')));
         $insert = $this->db->insert('mhs', $data);
         if ($insert) {
-            $this->response($data, 200);
+            // $this->response($data, 200);
+            header('Location: ' . $_SERVER['HTTP_REFERER'] .'?response=200');
         } else {
             $this->response(array('status' => 'fail', 502));
         }

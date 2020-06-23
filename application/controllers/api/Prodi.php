@@ -18,7 +18,7 @@ class Prodi extends REST_Controller {
         if ($id == '') {
             $kontak = $this->db->get('prodi')->result();
         } else {
-            $this->db->where('id', $id);
+            $this->db->where('prodi_code', $id);
             $kontak = $this->db->get('prodi')->result();
         }
         $this->response($kontak, 200);
