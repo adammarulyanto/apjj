@@ -25,13 +25,16 @@ class Classes extends REST_Controller {
     }
 
     function index_post() {
+        $class_code = $this->db->query("SELECT ifnull(concat('C',max(SUBSTRING(class_code, 2, 5))+1),'C1') code from classes")->row();
+        $class_code = $class_code->code;
         $data = array(
-                    'class_code'           => $this->post('class_code'),
+                    'class_code'           => $class_code,
                     'class_program'          => $this->post('class_program'),
                     'class_guide'    => $this->post('class_guide'));
         $insert = $this->db->insert('classes', $data);
         if ($insert) {
-            $this->response($data, 200);
+            // $this->response($data, 200);
+            header('Location: ' . $_SERVER['HTTP_REFERER'] .'?response=200');
         } else {
             $this->response(array('status' => 'fail', 502));
         }

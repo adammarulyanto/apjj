@@ -20,7 +20,7 @@ class Matkul extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['list_dosen'] = $this->db->query('select * from matkul')->result();
+		$data['list_matkul'] = $this->db->query('select * from matkul')->result();
 		$this->load->view('header');
 		$this->load->view('matkul',$data);
 		$this->load->view('footer');
