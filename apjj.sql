@@ -11,11 +11,30 @@
  Target Server Version : 100406
  File Encoding         : 65001
 
- Date: 24/06/2020 16:35:08
+ Date: 08/07/2020 23:12:51
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for admins
+-- ----------------------------
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE `admins`  (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `last_login` datetime(0) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
+  PRIMARY KEY (`admin_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admins
+-- ----------------------------
+INSERT INTO `admins` VALUES (1, 'Administator', 'admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '2020-07-08 22:58:13', '2020-07-06 22:27:34');
 
 -- ----------------------------
 -- Table structure for attempt
@@ -82,6 +101,7 @@ CREATE TABLE `classes`  (
   `class_code` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `class_program` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `class_guide` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `class_status` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`class_code`) USING BTREE,
@@ -94,7 +114,7 @@ CREATE TABLE `classes`  (
 -- ----------------------------
 -- Records of classes
 -- ----------------------------
-INSERT INTO `classes` VALUES ('C1', 'P1', 'D123', NULL, NULL);
+INSERT INTO `classes` VALUES ('C1', 'P1', 'D123', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for classmember
@@ -148,7 +168,6 @@ INSERT INTO `dosen` VALUES ('D125', 'aaa', 'aaa', '2020-06-25', 'asd@mail.com', 
 INSERT INTO `dosen` VALUES ('D126', 'aaaa', 'aaa', '2020-06-25', 'asd@mail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '2020-06-24 01:28:45', NULL);
 INSERT INTO `dosen` VALUES ('D127', 'asd', 'asd', '0000-00-00', 'asd@mail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '2020-06-24 01:29:13', NULL);
 INSERT INTO `dosen` VALUES ('D128', 'asd', '123', '0000-00-00', 'asd@mail.com', 'f10e2821bbbea527ea02200352313bc059445190', '2020-06-24 01:34:35', NULL);
-INSERT INTO `dosen` VALUES ('D129', NULL, NULL, NULL, NULL, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '2020-06-24 09:42:28', NULL);
 
 -- ----------------------------
 -- Table structure for exercise
@@ -191,6 +210,7 @@ CREATE TABLE `lecture`  (
   `class_code` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `matkul_code` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `dosen_code` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `lecture_status` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`lecture_id`) USING BTREE,
@@ -205,8 +225,8 @@ CREATE TABLE `lecture`  (
 -- ----------------------------
 -- Records of lecture
 -- ----------------------------
-INSERT INTO `lecture` VALUES (5, 'C1', 'MK1', 'D123', NULL, NULL);
-INSERT INTO `lecture` VALUES (6, 'C1', 'MK1', 'D125', NULL, NULL);
+INSERT INTO `lecture` VALUES (5, 'C1', 'MK1', 'D123', '1', NULL, NULL);
+INSERT INTO `lecture` VALUES (6, 'C1', 'MK1', 'D125', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for lectureperiod
@@ -264,6 +284,7 @@ CREATE TABLE `matkul`  (
   `matkul_code` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `matkul_name` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `matkul_sks` tinyint(4) NULL DEFAULT NULL,
+  `matkul_status` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`matkul_code`) USING BTREE,
@@ -273,7 +294,7 @@ CREATE TABLE `matkul`  (
 -- ----------------------------
 -- Records of matkul
 -- ----------------------------
-INSERT INTO `matkul` VALUES ('MK1', 'Sistem Informasi', 4, NULL, NULL);
+INSERT INTO `matkul` VALUES ('MK1', 'Sistem Informasi', 4, '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for mhs
@@ -286,6 +307,7 @@ CREATE TABLE `mhs`  (
   `mhs_birthdate` date NULL DEFAULT NULL,
   `mhs_email` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `mhs_password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `mhs_status` enum('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT current_timestamp(0),
   `updated_at` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`mhs_nim`) USING BTREE,
@@ -297,10 +319,10 @@ CREATE TABLE `mhs`  (
 -- ----------------------------
 -- Records of mhs
 -- ----------------------------
-INSERT INTO `mhs` VALUES (0, 'asdas', 'asdasd', '0000-00-00', 'asda@mail.com', 'f10e2821bbbea527ea02200352313bc059445190', '2020-06-24 02:07:28', NULL);
-INSERT INTO `mhs` VALUES (123435, 'asdasd', 'asdasd', '0000-00-00', 'asda@mail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '2020-06-24 02:08:18', NULL);
-INSERT INTO `mhs` VALUES (11172520, 'maruls', 'adam', '1999-05-04', 'main@mail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', NULL, NULL);
-INSERT INTO `mhs` VALUES (11172526, 'first', 'last', '1999-01-01', '@mail.com', '12345678', NULL, NULL);
+INSERT INTO `mhs` VALUES (0, 'asdas', 'asdasd', '0000-00-00', 'asda@mail.com', 'f10e2821bbbea527ea02200352313bc059445190', '1', '2020-06-24 02:07:28', '2020-07-06 22:42:44');
+INSERT INTO `mhs` VALUES (123435, 'asdasd', 'asdasd', '0000-00-00', 'asda@mail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', '2020-06-24 02:08:18', '2020-07-06 22:42:44');
+INSERT INTO `mhs` VALUES (11172520, 'maruls', 'adam', '1999-05-04', 'main@mail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', NULL, '2020-07-06 22:42:44');
+INSERT INTO `mhs` VALUES (11172526, 'first', 'last', '1999-01-01', '@mail.com', '12345678', '', NULL, '2020-07-06 22:43:30');
 
 -- ----------------------------
 -- Table structure for prodi
