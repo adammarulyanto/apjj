@@ -68,6 +68,7 @@
                 <th>Program</th>
                 <th>Dosen</th>
                 <th>Member</th>
+                <th>Kelas</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -80,8 +81,9 @@
                 <td><?=$list_kelas->prodi_name;?></td>
                 <td><?=$list_kelas->dosen_name;?></td>
                 <td><a href="#"><?=$list_kelas->jml_member;?> Member</a></td>
+                <td><?=$list_kelas->stat;?></td>
                 <td>
-                  <a type="submit" href="<?=base_url()?>api/classes/delete/<?=$list_kelas->class_code?>" class="btn btn-danger btn-circle btn-sm">
+                  <a type="submit" href="<?=base_url()?>kelas/delete?class_code=<?=$list_kelas->class_code?>" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </a>
                 </td>

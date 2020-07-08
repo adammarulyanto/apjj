@@ -71,5 +71,6 @@ class Dosen extends REST_Controller {
             $this->response(array('status' => 'fail', 502));
         }
     }
+
 }
 ?>

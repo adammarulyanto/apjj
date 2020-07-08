@@ -51,6 +51,7 @@
                 <th>Code</th>
                 <th>Name</th>
                 <th>SKS</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -62,8 +63,9 @@
                 <td><?=$list_matkul->matkul_code;?></td>
                 <td><?=$list_matkul->matkul_name;?></td>
                 <td><?=$list_matkul->matkul_sks;?></td>
+                <td><?=$list_matkul->stat;?></td>
                 <td>
-                  <a type="submit" href="<?=base_url()?>api/dosen/delete?dosen_code=<?=$list_matkul->matkul_code?>" class="btn btn-danger btn-circle btn-sm">
+                  <a type="submit" href="<?=base_url()?>matkul/delete?matkul_code=<?=$list_matkul->matkul_code?>" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </a>
                 </td>

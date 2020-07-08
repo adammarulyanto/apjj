@@ -68,6 +68,7 @@
                 <th>Fullname</th>
                 <th>Email</th>
                 <th>Birth Date</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -80,7 +81,10 @@
                 <td><?=$list_mhs->mhs_firstname;?> <?=$list_mhs->mhs_lastname;?></td>
                 <td><?=$list_mhs->mhs_email;?></td>
                 <td><?=$list_mhs->mhs_birthdate;?></td>
-                <td>
+                <td><?=$list_mhs->stat;?></td>
+                <td><a type="submit" href="<?=base_url()?>mahasiswa/delete?mhs_nim=<?=$list_mhs->mhs_nim?>" class="btn btn-danger btn-circle btn-sm">
+                <i class="fas fa-trash"></i>
+              </a>
                 </td>
               </tr>
               <?php

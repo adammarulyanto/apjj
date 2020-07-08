@@ -101,6 +101,7 @@
                 <th>Matkul(sks)</th>
                 <th>Hari</th>
                 <th>Waktu (dari-sampai)</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -113,9 +114,10 @@
                 <td><?=$list_lecture->dosen_name;?></td>
                 <td><?=$list_lecture->matkul_name;?> (<?=$list_lecture->matkul_sks;?>)</td>
                 <td><?=$list_lecture->start_day;?></td>
+                <td><?=$list_lecture->stat;?></td>
                 <td><?=$list_lecture->start_hour;?> - <?=$list_lecture->end_hour;?></td>
                 <td>
-                  <a type="submit" href="<?=base_url()?>api/lecture/delete?lecture_id=<?=$list_lecture->lecture_id?>" class="btn btn-danger btn-circle btn-sm">
+                  <a type="submit" href="<?=base_url()?>lecture/delete?lecture_id=<?=$list_lecture->lecture_id?>" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </a>
                 </td>

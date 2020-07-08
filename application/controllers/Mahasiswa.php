@@ -20,9 +20,19 @@ class Mahasiswa extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['list_mhs'] = $this->db->query('select * from mhs')->result();
+		$data['list_mhs'] = $this->db->query('select *,if(mhs_status="1","Active","Inactive") stat from mhs')->result();
 		$this->load->view('header');
 		$this->load->view('mahasiswa',$data);
 		$this->load->view('footer');
+	}
+	function delete() {
+			$id = $_GET['mhs_nim'];
+
+			$query = $this->db->query("UPDATE mhs SET mhs_status=0 where mhs_nim='".$id."'");
+			if($query){
+				header('Location: ' . $_SERVER['HTTP_REFERER'] .'?response=200');
+			} else {
+					$this->response(array('status' => 'fail', 502));
+			}
 	}
 }

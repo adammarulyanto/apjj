@@ -20,9 +20,19 @@ class Matkul extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['list_matkul'] = $this->db->query('select * from matkul')->result();
+		$data['list_matkul'] = $this->db->query('select *,if(matkul_status="1","Active","Inactive") stat from matkul')->result();
 		$this->load->view('header');
 		$this->load->view('matkul',$data);
 		$this->load->view('footer');
+	}
+	function delete() {
+			$id = $_GET['matkul_code'];
+
+			$query = $this->db->query("UPDATE matkul SET matkul_status=0 where matkul_code='".$id."'");
+			if($query){
+				header('Location: ' . $_SERVER['HTTP_REFERER'] .'?response=200');
+			} else {
+					$this->response(array('status' => 'fail', 502));
+			}
 	}
 }

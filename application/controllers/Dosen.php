@@ -25,4 +25,14 @@ class Dosen extends CI_Controller {
 		$this->load->view('dosen',$data);
 		$this->load->view('footer');
 	}
+	function delete() {
+			$id = $_GET['dosen_code'];
+
+			$query = $this->db->query("DELETE FROM dosen where dosen_code='".$id."'");
+			if($query){
+				header('Location: ' . $_SERVER['HTTP_REFERER'] .'?response=200');
+			} else {
+					$this->response(array('status' => 'fail', 502));
+			}
+	}
 }

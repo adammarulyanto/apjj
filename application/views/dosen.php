@@ -77,7 +77,7 @@
                 <td><?=$list_dosen->dosen_email;?></td>
                 <td><?=$list_dosen->dosen_birthdate;?></td>
                 <td>
-                  <a type="submit" href="<?=base_url()?>api/dosen/delete?dosen_code=<?=$list_dosen->dosen_code?>" class="btn btn-danger btn-circle btn-sm">
+                  <a type="submit" href="<?=base_url()?>dosen/delete?dosen_code=<?=$list_dosen->dosen_code?>" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </a>
                 </td>
